@@ -12,12 +12,8 @@ export const getTasks = async (req, res) => {
 export const updateTask = async (req, res) => {
   const { id, checked } = req.body;
   try {
-    const updatedTask = await Todo.findByIdAndUpdate(
-      id,
-      { checked },
-      { new: true }
-    );
-    res.status(200).json(updatedTask);
+    await Todo.updateOne({ _id: id }, { checked }, { new: true });
+    res.status(200).json("Successfully updated task!");
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
