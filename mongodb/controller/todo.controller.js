@@ -9,17 +9,26 @@ export const getTasks = async (req, res) => {
   }
 };
 
-export const createOrUpdateTodo = async (req, res) => {
-  const { id, name, checked } = req.body;
+export const updateTask = async (req, res) => {
+  const { id, checked } = req.body;
   try {
-    let todo;
-    if (id) {
-      todo = await Todo.findByIdAndUpdate(id, { checked }, { new: true });
-    } else {
-      todo = new Todo({ name, checked });
-      await todo.save();
-    }
-    res.status(200).json(todo);
+    const updatedTask = await Todo.findByIdAndUpdate(
+      id,
+      { checked },
+      { new: true }
+    );
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const createTask = async (req, res) => {
+  const { name, checked } = req.body;
+  try {
+    const newTask = new Todo({ name, checked });
+    await newTask.save();
+    res.status(200).json(newTask);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
