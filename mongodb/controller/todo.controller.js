@@ -23,7 +23,7 @@ export const updateTask = async (req, res) => {
   }
 };
 
-export const createTask = async (req, res) => {
+export const addTask = async (req, res) => {
   const { name, checked } = req.body;
   try {
     const newTask = new Todo({ name, checked });
