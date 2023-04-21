@@ -35,6 +35,16 @@ export const addTask = async (req, res) => {
   }
 };
 
+export const deleteTask = async (req, res) => {
+  const { id } = req.body;
+  try {
+    await Todo.findByIdAndDelete({ _id: id });
+    res.status(200).json({ message: "Task deleted successfully!" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const deleteAllTasks = async (req, res) => {
   try {
     await Todo.deleteMany();
