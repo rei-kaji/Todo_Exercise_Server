@@ -45,4 +45,7 @@ To start the development server, run the following command:
 npm run start
 ```
 
+After start server, please start client-side application.
+[Todo Exercise Client](https://github.com/rei-kaji/Todo_Exercise_Client)
+
 This will start the development server on http://localhost:8080.
