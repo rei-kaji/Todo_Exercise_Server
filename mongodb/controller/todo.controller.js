@@ -23,10 +23,10 @@ export const addTask = async (req, res) => {
   const { name, checked } = req.body;
 
   try {
-    const newTask = await new Todo({ name, checked });
-    await newTask.save();
+    const newTask = new Todo({ name, checked });
+    const savedTask = await newTask.save();
 
-    res.status(201).json(newTask);
+    res.status(201).json(savedTask);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to add task" });
