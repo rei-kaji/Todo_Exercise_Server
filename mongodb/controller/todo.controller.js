@@ -23,7 +23,7 @@ export const addTask = async (req, res) => {
   const { name, checked } = req.body;
 
   try {
-    const newTask = new Todo({ name, checked });
+    const newTask = await new Todo({ name, checked });
     await newTask.save();
 
     res.status(201).json(newTask);
