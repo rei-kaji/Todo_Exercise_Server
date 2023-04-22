@@ -21,17 +21,15 @@ export const updateTask = async (req, res) => {
 
 export const addTask = async (req, res) => {
   const { name, checked } = req.body;
-  try {
-    const existingTask = await Todo.findOne({ name });
-    if (existingTask) {
-      return res.status(409).json({ message: "Task already exists" });
-    }
 
+  try {
     const newTask = new Todo({ name, checked });
     await newTask.save();
+
     res.status(201).json(newTask);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: "Failed to add task" });
   }
 };
 
